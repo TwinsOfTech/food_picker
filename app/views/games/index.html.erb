@@ -1,25 +1,10 @@
-<h1>Listing games</h1>
+<div id="games"></div>
 
-<table>
-  <tr>
-    <th>Address</th>
-    <th>Zip</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<script type="text/javascript">
+  $(function() {
+    // Blog is the app name
+    window.router = new FoodPicker.Routers.GamesRouter({games: <%= @games.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
 
-<% @games.each do |game| %>
-  <tr>
-    <td><%= game.address %></td>
-    <td><%= game.zip %></td>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Game', new_game_path %>
