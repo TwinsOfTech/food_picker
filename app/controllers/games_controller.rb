@@ -1,24 +1,19 @@
 class GamesController < ApplicationController
-  # GET /games
-  # GET /games.json
-  def index
-    @games = Game.all
+  respond_to :html, :js, :json
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games }
-    end
+  def index
+    @games = Game.all(:finished => false)
+    #respond_with(@games, :include => :game_users)
+    respond_with @games.map{|g| g.attributes.merge(:game_users => g.game_users.map{|e| e.attributes})}
   end
 
   # GET /games/1
   # GET /games/1.json
   def show
     @game = Game.get(params[:id])
+    #respond_with(@game, :include => :game_users)
+    render :json => @game.attributes.merge(:game_users => @game.game_users.map{|e| e.attributes})
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @game }
-    end
   end
 
   # GET /games/new
@@ -35,6 +30,7 @@ class GamesController < ApplicationController
   # GET /games/1/edit
   def edit
     @game = Game.get(params[:id])
+    respond_with @game
   end
 
   # POST /games
