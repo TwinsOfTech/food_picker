@@ -4,7 +4,9 @@ class GamesController < ApplicationController
   def index
     @games = Game.all(:finished => false)
     #respond_with(@games, :include => :game_users)
-    respond_with @games.map{|g| g.attributes.merge(:game_users => g.game_users.map{|e| e.attributes})}
+    @games = @games.map{|g| g.attributes.merge(:game_users => g.game_users.map{|e| e.attributes})}
+    @users = User.all(:order => [:name.asc])
+    respond_with @games
   end
 
   # GET /games/1

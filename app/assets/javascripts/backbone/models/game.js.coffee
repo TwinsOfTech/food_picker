@@ -10,8 +10,12 @@ class FoodPicker.Models.Game extends Backbone.RelationalModel
   relations: [{
     type: Backbone.HasMany,
     key: 'game_users',
-    relatedModel: 'FoodPicker.Models.GameUser'
-    collectionType: 'FoodPicker.Collections.GameUsersCollection'
+    relatedModel: 'FoodPicker.Models.GameUser',
+    collectionType: 'FoodPicker.Collections.GameUsersCollection',
+    reverseRelation: {
+      key: 'game',
+      includeInJSON: 'id'
+    }
   }]
 
   #initialize: -> 

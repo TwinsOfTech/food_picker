@@ -176,9 +176,9 @@ h2 {
   font-weight: 300;
 }
 #main-content {
-  background: #FFF;
   width: 960px;
   margin: 20px auto;
+  overflow: hidden;
 }
 #main-content .row-holder {
   border-bottom: 1px solid #C3CCCF;
@@ -192,30 +192,21 @@ h2 {
 #main-content form .row-holder p {
   padding: 8px 0;
 }
-/*
-#main-content h3.title-bar{ 
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 12px;
-  margin:0;
-  background:#e7e7e7;
-  color:#777;
-  text-shadow:#fff 0 1px 0;
-  text-align:left;
-  -webkit-user-select:none;
-  -khtml-user-select:none;
-  -moz-user-select:none;
-  -o-user-select:none;
-  user-select:none;
-  -webkit-background-clip:padding-box; 
-  background-image:-moz-linear-gradient(top,#edf3fa,#d0d9e4);
-  background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0,#edf3fa),color-stop(1,#d0d9e4));
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#edf3fa',EndColorStr='#d0d9e4');
-  border-top:1px solid #fff;
-  border-bottom:1px solid #b4bbc4;
+
+#games {
+  background: #FFF;
+  padding: 10px;
 }
-*/
-/*******************/
+.game {
+  width: 400px;
+  padding: 10px;
+  border: 1px solid #bebebe;
+  margin-bottom: 5px;
+}
+.game p {
+  padding-top: 5px;
+}
+
 
 
 body footer {

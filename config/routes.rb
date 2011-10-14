@@ -1,7 +1,11 @@
 FoodPicker::Application.routes.draw do
   
-  resources :games
-  resources :users
+  resources :games do
+    resources :game_users
+  end
+  resources :users do
+    resources :game_users
+  end
 
   root :to => 'games#index'
 

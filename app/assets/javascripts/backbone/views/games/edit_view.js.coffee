@@ -9,7 +9,6 @@ class FoodPicker.Views.Games.EditView extends Backbone.View
   update : (e) ->
     e.preventDefault()
     e.stopPropagation()
-    
     @model.save(null,
       success : (game) =>
         @model = game
@@ -18,7 +17,5 @@ class FoodPicker.Views.Games.EditView extends Backbone.View
     
   render : ->
     $(this.el).html(this.template(@model.toJSON() ))
-    
     this.$("form").backboneLink(@model)
-    
     return this

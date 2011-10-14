@@ -1,9 +1,15 @@
+
+
 <div id="games"></div>
+
+<%= @games.to_json.html_safe %>
+<br />
+<%= @users.to_json.html_safe %>
 
 <script type="text/javascript">
   $(function() {
     // Blog is the app name
-    window.router = new FoodPicker.Routers.GamesRouter({games: <%= @games.to_json.html_safe -%>});
+      window.router = new FoodPicker.Routers.GamesRouter({games: <%= @games.to_json.html_safe -%>, users: <%= @users.to_json.html_safe -%>});
     Backbone.history.start();
   });
 </script>
