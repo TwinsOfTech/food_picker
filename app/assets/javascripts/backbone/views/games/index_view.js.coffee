@@ -16,14 +16,17 @@ class FoodPicker.Views.Games.IndexView extends Backbone.View
     #@model = @options.games.get(this.$(e.target).attr('data-id'))
     user_id = this.$(e.target).find('select').find('option:selected').attr('value')
     game_id = this.$(e.target).attr('data-id')
+    game = @options.games.get(this.$(e.target).attr('data-id'))
+    game_users = game.attributes.game_users
     @model = new FoodPicker.Models.GameUser({ user_id: user_id, user: user_id, game_id: game_id, game: game_id })
     @model.save(null,
       success : (game_user) =>
-        console.log('success')
-        @model = game_user
-        @options.games.addOne(@model)
-        ##Reload collections to refresh page?
-        #window.location.hash = "/#{@model.id}"
+        game_users.add(game_user)
+        this.render()
+      error : (game_user, response) =>
+        console.log("ERROR...")
+        console.log(response.responseText)
+        alert(response.responseText)
     )
 
 

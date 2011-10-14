@@ -4,7 +4,7 @@ class GameUser
   property :id, Serial
   property :user_id, Integer, :required => true
   property :game_id, Integer, :required => true
-  property :name, String
+  property :name, String, :required => true
 
   belongs_to :user
   belongs_to :game
