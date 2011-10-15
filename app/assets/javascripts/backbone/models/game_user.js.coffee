@@ -22,4 +22,3 @@ class FoodPicker.Collections.GameUsersCollection extends Backbone.Collection
 
 
 
-

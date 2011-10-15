@@ -8,7 +8,8 @@ class FoodPicker.Views.Games.IndexView extends Backbone.View
     @options.games.bind('reset', @addAll)
 
   events:
-    "submit .join-game" : "join"
+    "submit .join-game"        : "join"
+    "change .join-game select" : "newUser"
 
   join: (e) ->
     e.preventDefault()
@@ -26,9 +27,13 @@ class FoodPicker.Views.Games.IndexView extends Backbone.View
       error : (game_user, response) =>
         console.log("ERROR...")
         console.log(response.responseText)
-        alert(response.responseText)
+        @model.set({errors: $.parseJSON(response.responseText)})
+        alert(@model.attributes.errors.errors)
     )
 
+  newUser: (e) ->
+    if (this.$(e.target).attr('value') == 'new_user')
+      console.log('facebox new user')
 
   addAll: () ->
     @options.games.each(@addOne)
