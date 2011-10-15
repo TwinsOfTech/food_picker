@@ -20,7 +20,11 @@
     $("#select-user select").change(function(){
       var val = $(this).find('option:selected').attr('value');
       if ( val == 'new_user' ){
-        console.log('NEW USER PLZ');
+        var form = $(this).closest('form');
+        var input = $("<input />").attr({ 'type' : 'text', 'name' : 'name', 'placeholder' : 'Your name...' });
+        $(this).remove();
+        form.prepend(input);
+        input.focus();
       }
     });
   });
