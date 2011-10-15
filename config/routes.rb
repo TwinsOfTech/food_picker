@@ -7,7 +7,7 @@ FoodPicker::Application.routes.draw do
     resources :game_users
   end
 
-  root :to => 'games#index'
+  root :to => 'main#index'
 
   # See how all your routes lay out with "rake routes"
 

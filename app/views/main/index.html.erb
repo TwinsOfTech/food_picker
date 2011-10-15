@@ -1,0 +1,30 @@
+
+
+<h1> Who are you? </h1>
+
+<form action="/users" id="select-user" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <select name="user_id">
+    <% User.all.each do |user| %>
+      <option value=""></option>
+      <option value="new_user">I'm not listed...</option>
+      <option value="<%= user.id %>"><%=user.name%></option>
+    <% end %>
+  </select>
+  <input type="submit" value="This is me!" />
+</form>
+
+<script type="text/javascript">
+
+  $(function(){
+    $("#select-user select").change(function(){
+      var val = $(this).find('option:selected').attr('value');
+      if ( val == 'new_user' ){
+        console.log('NEW USER PLZ');
+      }
+    });
+  });
+</script>
+
+
+
