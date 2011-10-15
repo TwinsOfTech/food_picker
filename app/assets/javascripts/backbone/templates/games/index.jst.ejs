@@ -1,44 +1,27 @@
 
 
-<% if (games.length > 0) { %>
-  <h1>Current Games</h1>
-  <% for(var i=0;i<games.length;i++){ %>
-    <div class="game">
-      <%= games[i].address %>,
-      <%= games[i].zip %> -
-      <%= _.size(games[i].game_users) %> participants
+<h1>Who are you?</h1>
 
-      <% _.each(games[i].game_users, function(game_user){ %>
-        <p><%= game_user.name %></p>
-      <% }); %>
-      <form class="join-game" data-id="<%=games[i].id%>">
-        <select name="user_id">
-          <% _.each(users, function(user){ %>
-            <option value=""></option>
-            <option value="new_user">New User...</option>
-            <option value="<%= user.id %>"><%=user.name%></option>
-          <% }); %>
-        </select>
-        <input type="submit" value="Join Game" />
-      </form>
+<form id="select-user">
+  <select name="user_id">
+    <% _.each(users, function(user){ %>
+      <option value=""></option>
+      <option value="new_user">I'm not listed...</option>
+      <option value="<%= user.id %>"><%=user.name%></option>
+    <% }); %>
+  </select>
+  <input type="submit" value="This is me!" />
+</form>
 
-    </div>
-  <% } %>
+<br /><br />
+
+<h1>Current Games</h1>
+
+<% if (games.length == 0) { %>
+  No Games, <a href="#/new">Start a New Game</a>
 <% } %>
 
+<div id="games"></div>
 
-<h1> Start a new Game </h1>
 
-<table id="games-table">
-  <tr>
-    <th>Address</th>
-    <th>Zip</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-</table>
 
-<br/>
-
-<a href="#/new">New Game</a>

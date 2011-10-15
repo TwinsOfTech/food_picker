@@ -1,7 +1,14 @@
-<td><%= address %></td>
-<td><%= zip %></td>
-<td>---<%= _.size(game_users) %>---</td>
 
-<td><a href="#/<%= id %>">Show</td>
-<td><a href="#/<%= id %>/edit">Edit</td>
-<td><a href="#/<%= id %>/destroy" class="destroy">Destroy</a></td>
+<div class="game">
+  <%= address %>,
+  <%= zip %> -
+  <%= _.size(game_users) %> participants
+
+  <% _.each(game_users, function(game_user){ %>
+    <p><%= game_user.name %></p>
+  <% }); %>
+  <form class="join-game" data-id="<%=id%>">
+    <input type="submit" value="Join Game" />
+  </form>
+
+</div>
