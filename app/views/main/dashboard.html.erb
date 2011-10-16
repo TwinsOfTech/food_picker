@@ -1,5 +1,14 @@
 
+<script type="text/javascript">
+  $(function() {
+    // Blog is the app name
+    FoodPicker.current_user = {}
+    <% User.get(session['user_id'].to_i).attributes.each do |k,v| %>
+      FoodPicker.current_user.<%=k.to_s%> = "<%=v%>";
+    <% end %>
+    window.router = new FoodPicker.Routers.GamesRouter({games: <%= @games.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>
 
-Main#dashboard
 
-<%= session.inspect %>

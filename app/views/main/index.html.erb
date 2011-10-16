@@ -5,9 +5,9 @@
 <form action="/users" id="select-user" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
   <select name="user_id">
+    <option value=""></option>
+    <option value="new_user">I'm not listed...</option>
     <% User.all.each do |user| %>
-      <option value=""></option>
-      <option value="new_user">I'm not listed...</option>
       <option value="<%= user.id %>"><%=user.name%></option>
     <% end %>
   </select>

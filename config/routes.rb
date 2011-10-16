@@ -7,6 +7,7 @@ FoodPicker::Application.routes.draw do
     resources :game_users
   end
 
+  match '/logout' => "main#logout"
   root :to => 'main#index'
 
   # See how all your routes lay out with "rake routes"
