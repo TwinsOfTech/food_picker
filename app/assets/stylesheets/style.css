@@ -208,7 +208,16 @@ h2 {
   padding-top: 5px;
 }
 
-
+#stores {
+  float: right;
+  border: 1px solid red;
+  width: 600px;
+  overflow: hidden;
+}
+#participants {
+  border: 1px solid red;
+  width: 300px;
+}
 
 body footer {
   padding-bottom: 40px;

@@ -41,7 +41,9 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
+        GameUser.create(:game_id => @game.id, :user_id => session['user_id'].to_i, :name => User.get(session['user_id']).name)
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        #format.json { render json: @game, status: :created, location: @game }
         format.json { render json: @game, status: :created, location: @game }
       else
         format.html { render action: "new" }

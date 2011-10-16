@@ -1,15 +1,14 @@
 
+<h1> <%= game.address %>, <%= game.zip %> </h1>
 
-<%= console.log(game) %>
-<p>
-  <b>Address:</b>
-  <%= game.address %>
-</p>
+<div id="stores">
+  <h2> Restaurants </h2>
+</div>
 
-<p>
-  <b>Zip:</b>
-  <%= game.zip %>
-</p>
+<div id="participants">
+  <h2> Participants (<%= _.size(game.game_users) %>) </h2>
+  <% _.each(game.game_users, function(game_user){ %>
+    <p> <%= game_user.name %></p>
+  <% }); %>
+<div>
 
-
-<a href="#/index">Back</a>

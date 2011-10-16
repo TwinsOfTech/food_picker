@@ -9,14 +9,12 @@ class FoodPicker.Views.Games.IndexView extends Backbone.View
 
   events:
     "submit .join-game"          : "join"
-    "change #select-user select" : "selectUser"
-    "submit #select-user"        : "addUser"
 
   join: (e) ->
     e.preventDefault()
     e.stopPropagation()
     #@model = @options.games.get(this.$(e.target).attr('data-id'))
-    user_id = this.$("#select-user").find('select').find('option:selected').attr('value')
+    user_id = FoodPicker.current_user.id
     game_id = this.$(e.target).attr('data-id')
     game = @options.games.get(game_id)
     game_users = game.attributes.game_users
@@ -24,22 +22,13 @@ class FoodPicker.Views.Games.IndexView extends Backbone.View
     @model.save(null,
       success : (game_user) =>
         game_users.add(game_user)
-        this.render()
+        #this.render()
+        window.location.hash = "/#{game_id}"
       error : (game_user, response) =>
-        console.log("ERROR...")
         console.log(response.responseText)
         @model.set({errors: $.parseJSON(response.responseText)})
         alert(@model.attributes.errors.errors)
     )
-
-  selectUser: (e) ->
-    if (this.$(e.target).attr('value') == 'new_user')
-      console.log('facebox new user')
-
-  addUser: (e) ->
-    e.preventDefault()
-    e.stopPropagation()
-    console.log('addUser')
 
   addAll: () ->
     @options.games.each(@addOne)
@@ -49,6 +38,6 @@ class FoodPicker.Views.Games.IndexView extends Backbone.View
     @$("#games").append(view.render().el)
 
   render: ->
-    $(@el).html(@template(games: @options.games.toJSON(), users: @options.users.toJSON() ))
+    $(@el).html(@template(games: @options.games.toJSON() ))
     @addAll()
     return this

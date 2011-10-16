@@ -17,9 +17,7 @@ class GameUsersController < ApplicationController
   end
 
   def create
-    @game_user = GameUser.new
-    @game_user.user_id = params[:game_user][:user_id].to_i
-    @game_user.game_id = params[:game_user][:game_id].to_i
+    @game_user = GameUser.first_or_new(:user_id => params[:game_user][:user_id].to_i, :game_id => params[:game_user][:game_id])
     @game_user.name = @game_user.user.name if @game_user.user.present?
     if @game_user.save
       render :json => @game_user.attributes
