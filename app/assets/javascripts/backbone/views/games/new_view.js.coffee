@@ -21,10 +21,13 @@ class FoodPicker.Views.Games.NewView extends Backbone.View
     @model.unset("errors")
     
     @collection.create(@model.toJSON(), 
-      success: (game) =>
+      success: (game, resp) =>
         @model = game
+        # game_restaurants are created from json returned from server in request
+        # could do the same thing for game_user, but this is an example of how to
+        # do that in backbone. I think it would be best to move it to the json
+        # returned from the server tp keep things simple and together.
         game_user = new FoodPicker.Models.GameUser({ name: FoodPicker.current_user.name, user_id: FoodPicker.current_user.id, user: FoodPicker.current_user.id, game_id: game.id, game: game.id })
-        #TODO: add game_restaurants
         game.attributes.game_users.add(game_user)
         window.location.hash = "/#{@model.id}"
         

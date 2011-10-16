@@ -56,10 +56,10 @@ class GamesController < ApplicationController
             GameRestaurant.first_or_create(:game_id => @game.id, :name => restaurant['name'])
           end
         end
-
+        @game.reload ## popular game_restaurants
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         #format.json { render json: @game, status: :created, location: @game }
-        format.json { render json: @game, status: :created, location: @game }
+        format.json { render json: @game.attributes.merge({:game_restaurants => @game.game_restaurants.map{|e| e.attributes} }), status: :created, location: @game }
       else
         format.html { render action: "new" }
         format.json { render json: @game.errors, status: :unprocessable_entity }
