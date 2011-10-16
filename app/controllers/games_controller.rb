@@ -2,9 +2,8 @@ class GamesController < ApplicationController
   respond_to :html, :js, :json
 
   def index
-    @games = Game.all(:finished => false)
-    @games = @games.map{|g| g.attributes.merge(:game_users => g.game_users.map{|e| e.attributes})}
-    @users = User.all(:order => [:name.asc])
+    #@games = Game.all(:finished => false)
+    #@games = @games.map{|g| g.attributes.merge(:game_users => g.game_users.map{|e| e.attributes})}
     respond_with @games
   end
 
@@ -42,6 +41,22 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.save
         GameUser.create(:game_id => @game.id, :user_id => session['user_id'].to_i, :name => User.get(session['user_id']).name)
+        loc = Geocoder.search("#{@game.address}, #{@game.state} #{@game.zip}")
+        if loc.present?
+          loc = loc.first
+          lat, lng = loc.latitude, loc.longitude
+          restaurants = []
+          restaurants << HTTParty.get('https://maps.googleapis.com/maps/api/place/search/json', :query => {:location => "39.63244,-104.79439", :radius => '1000', 
+                                                                                                          :types => 'food', :sensor => 'false', 
+                                                                                                          :key => 'AIzaSyD4ALtihDbCOAdXAZxgzG3aKpzXZheW-Js'})['results']
+          restaurants << HTTParty.get('https://maps.googleapis.com/maps/api/place/search/json', :query => {:location => "39.63244,-104.79439", :radius => '2000', 
+                                                                                                          :types => 'food', :sensor => 'false', 
+                                                                                                          :key => 'AIzaSyD4ALtihDbCOAdXAZxgzG3aKpzXZheW-Js'})['results']
+          restaurants.flatten.each do |restaurant|
+            GameRestaurant.first_or_create(:game_id => @game.id, :name => restaurant['name'])
+          end
+        end
+
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         #format.json { render json: @game, status: :created, location: @game }
         format.json { render json: @game, status: :created, location: @game }

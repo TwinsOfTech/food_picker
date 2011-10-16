@@ -2,7 +2,10 @@
 <h1> <%= game.address %>, <%= game.zip %> </h1>
 
 <div id="stores">
-  <h2> Restaurants </h2>
+  <h2> Restaurants (<%= _.size(game.game_restaurants) %>) </h2>
+  <% _.each(game.game_restaurants, function(game_restaurant){ %>
+    <p> <%= game_restaurant.name %> </p>
+  <% }); %>
 </div>
 
 <div id="participants">
@@ -11,4 +14,9 @@
     <p> <%= game_user.name %></p>
   <% }); %>
 <div>
+
+<%= console.log(game) %>
+<%= console.log(game.game_users) %>
+<%= console.log(game.game_restaurants) %>
+
 

@@ -3,6 +3,7 @@ class FoodPicker.Models.Game extends Backbone.RelationalModel
 
   defaults:
     address: null
+    state: null
     zip: null
     finished: false
   
@@ -12,6 +13,15 @@ class FoodPicker.Models.Game extends Backbone.RelationalModel
     key: 'game_users',
     relatedModel: 'FoodPicker.Models.GameUser',
     collectionType: 'FoodPicker.Collections.GameUsersCollection',
+    reverseRelation: {
+      key: 'game',
+      includeInJSON: 'id'
+    }
+  },
+    { type: Backbone.HasMany,
+    key: 'game_restaurants',
+    relatedModel: 'FoodPicker.Models.GameRestaurant',
+    collectionType: 'FoodPicker.Collections.GameRestaurantsCollection',
     reverseRelation: {
       key: 'game',
       includeInJSON: 'id'

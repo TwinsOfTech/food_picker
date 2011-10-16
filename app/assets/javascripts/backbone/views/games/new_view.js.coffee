@@ -24,6 +24,7 @@ class FoodPicker.Views.Games.NewView extends Backbone.View
       success: (game) =>
         @model = game
         game_user = new FoodPicker.Models.GameUser({ name: FoodPicker.current_user.name, user_id: FoodPicker.current_user.id, user: FoodPicker.current_user.id, game_id: game.id, game: game.id })
+        #TODO: add game_restaurants
         game.attributes.game_users.add(game_user)
         window.location.hash = "/#{@model.id}"
         

@@ -36,6 +36,8 @@ gem 'dm-zone-types', '0.3'
 gem 'httparty', '0.8.0'
 gem 'hashie', '1.1.0'
 
+gem 'geocoder', :git => "git://github.com/nitsujw/geocoder.git"
+
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"

@@ -5,7 +5,7 @@ class MainController < ApplicationController
     #session['user_id'] = nil
     if (@user = User.get(session['user_id'])).present?
       @games = Game.all(:finished => false)
-      @games = @games.map{|g| g.attributes.merge(:game_users => g.game_users.map{|e| e.attributes})}
+      @games = @games.map{|g| g.attributes.merge(:game_users => g.game_users.map{|e| e.attributes}, :game_restaurants => g.game_restaurants.map{|e| e.attributes} )}
       render :dashboard
     else
       render
