@@ -214,6 +214,15 @@ h2 {
   width: 600px;
   overflow: hidden;
 }
+#stores a {
+  font-size: 14px;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid #bebebe;
+}
+
 #participants {
   border: 1px solid red;
   width: 300px;

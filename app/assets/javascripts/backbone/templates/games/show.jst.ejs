@@ -3,8 +3,8 @@
 
 <div id="stores">
   <h2> Restaurants (<%= _.size(game.game_restaurants) %>) </h2>
-  <% _.each(game.game_restaurants, function(game_restaurant){ %>
-    <p> <%= game_restaurant.name %> </p>
+  <% _.each( _.sortBy(game.game_restaurants, function(gr){return gr.name.toString().toLowerCase()}), function(game_restaurant){ %>
+    <a href="#"><%= game_restaurant.name %></a>
   <% }); %>
 </div>
 
@@ -13,5 +13,5 @@
   <% _.each(game.game_users, function(game_user){ %>
     <p> <%= game_user.name %></p>
   <% }); %>
-<div>
+</div>
 
